@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+    <script type="text/javascript" src="customtilejson.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map" style="position:absolute;top:0;right:0;bottom:0;left:0;"></div>
+    <script>
+      var view = new ol.View({
+        center: [0, 0],
+        zoom: 3
+      });
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        target: 'map',
+        view: view
+      });
+
+      var counter = 1;
+      var addLayer = function(url, opacity) {
+        var currentCounter = ++counter;
+        loadCustomTileJSON(url, function(source, bounds) {
+          var viewExtent = ol.extent.applyTransform(bounds, ol.proj.getTransform('EPSG:4326', view.getProjection()));
+          viewExtent = ol.extent.getIntersection(viewExtent, view.getProjection().getExtent());
+          map.getLayers().push(new ol.layer.Tile({
+            source: source,
+            extent: viewExtent,
+            opacity: opacity || 1
+          }));
+          if (counter == currentCounter) {
+            view.fit(viewExtent, map.getSize());
+          }
+        });
+      };
+
+      addLayer('http://klokantech.tilehosting.com/styles/bright/rendered.json', 0.6);
+      //addLayer('http://labs.klokantech.com/tileserver/baidu.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/europe.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/france.json', 0.8);
+      addLayer('http://labs.klokantech.com/tileserver/gbsatellite.json', 0.9);
+      addLayer('http://labs.klokantech.com/tileserver/swiss.json', 0.9);
+      //addLayer('http://labs.klokantech.com/tileserver/usa.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/world3857custom.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/worldetrs89.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/worldUTM32633.json', 0.8);
+      //addLayer('http://labs.klokantech.com/tileserver/worldwgs48.json', 0.8);
+    </script>
+  </body>
+</html>
