@@ -4,7 +4,7 @@
  * @author petr.sloup@klokantech.com (Petr Sloup)
  */
 
-var loadCustomTileJSON = function(urlOrObject, callback) {
+var loadMapTilerTileJSON = function(urlOrObject, callback) {
   var processData = function(data) {
     var attribution = data['attribution'],
         scheme = data['scheme'] || 'xyz',

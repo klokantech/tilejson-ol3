@@ -2,12 +2,12 @@
   <head>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.16.0/ol.js"></script>
-    <script type="text/javascript" src="customtilejson.js"></script>
+    <script type="text/javascript" src="maptilertilejson.js"></script>
   </head>
   <body>
     <div id="map" class="map" style="position:absolute;top:0;right:0;bottom:0;left:0;"></div>
     <script>
-      loadCustomTileJSON('http://labs.klokantech.com/tileserver/europe.json', function(source, bounds, extent) {
+      loadMapTilerTileJSON('http://labs.klokantech.com/tileserver/europe.json', function(source, bounds, extent) {
         var map = new ol.Map({
           layers: [
             new ol.layer.Tile({
