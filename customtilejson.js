@@ -1,3 +1,8 @@
+/**
+ * Copyright (C) 2016 Klokan Technologies GmbH (info@klokantech.com)
+ *
+ * @author petr.sloup@klokantech.com (Petr Sloup)
+ */
 
 var loadCustomTileJSON = function(urlOrObject, callback) {
   var processData = function(data) {
