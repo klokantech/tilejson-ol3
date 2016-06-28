@@ -65,7 +65,6 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
       projection: ol.proj.get(crs),
       maxZoom: maxZoom,
       minZoom: minZoom,
-      reprojectionErrorThreshold: 0.1,
       tileGrid: tileGrid,
       attribution: attribution,
       tileUrlFunction: function(coord, pixelRatio, projection) {
@@ -80,7 +79,6 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
           return url;
         }
     });
-    source.setRenderReprojectionEdges(true);
 
     callback(source, bounds, sourceExtent);
   };
