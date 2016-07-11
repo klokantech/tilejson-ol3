@@ -21,7 +21,7 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
     if (window['proj4']) {
       var proj4def = data['proj4'];
       if (proj4def) {
-        window['proj4'].defs(crs, proj4def);
+        window['proj4']['defs'](crs, proj4def);
       }
     }
 
@@ -80,7 +80,7 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
         }
     });
 
-    callback(source, bounds, sourceExtent);
+    callback(source, bounds, sourceExtent, data);
   };
 
   if (typeof urlOrObject == 'string') {
