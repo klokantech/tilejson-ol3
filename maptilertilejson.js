@@ -36,7 +36,9 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
 
       tileMatrix.forEach(function(level) {
         tileSizes.push(level['tile_size'] || [256, 256]);
-        ol.extent.extend(combinedLevelExtents, level['extent']);
+        if (level['extent']) {
+          ol.extent.extend(combinedLevelExtents, level['extent']);
+        }
         origins.push(level['origin'] || [extent[0], extent[3]]);
         var pixelSize = level['pixel_size'] || [1, 1];
         resolutions.push(Math.abs(pixelSize[0]));
