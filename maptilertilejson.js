@@ -21,6 +21,9 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
     if (window['proj4']) {
       var proj4def = data['proj4'];
       if (proj4def) {
+        if (proj4def.indexOf('+proj=longlat') >= 0) {
+          proj4def += ' +units=degrees';
+        }
         window['proj4']['defs'](crs, proj4def);
       }
     }
