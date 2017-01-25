@@ -64,6 +64,12 @@ var loadMapTilerTileJSON = function(urlOrObject, callback) {
         maxZoom: maxZoom,
         minZoom: minZoom
       });
+      if (!sourceExtent && bounds) {
+        sourceExtent = ol.extent.applyTransform(
+          bounds,
+          ol.proj.getTransform('EPSG:4326', 'EPSG:3857')
+        );
+      }
     }
 
     var source = new ol.source.XYZ({
